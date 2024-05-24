@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Reddit-Application
+  labels:
+    app: Reddit-Application
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: Reddit-Application
+  template:
+    metadata:
+      labels:
+        app: Reddit-Application
+    spec:
+      containers:
+      - name: Reddit-Application
+        image: praveensivakumar/reddit-app:v1
+        ports:
+        - containerPort: 3000
