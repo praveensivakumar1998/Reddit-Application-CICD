@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: reddit-app
-        image: praveensivakumar/reddit-app:v1
+        image: praveensivakumar/reddit-app:replaceImageTag
         ports:
         - containerPort: 3000
