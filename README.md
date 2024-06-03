@@ -112,7 +112,11 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/2c6bbd24-80de-4ebd-8bd4-175177784fb5)
 
-## Step 6:
+## Step 6
+ * Create the seperate Kubernetes manifest repository for Deployment yaml update
+ * update the github manifest url in Jenkins File
+
+## Step 7:
 ### Create and Build the application
   * Create Pipeline job in a Jenkins Dashboard and update your JenkinsFile in a Pipeline
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/73cefee3-0ecf-4179-accb-dd8c11edbb95)
@@ -140,6 +144,9 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
  ***Trivy Image Scan Report***
  
  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d57f6f5e-9140-4230-a9da-fc41939cc3f0)
+--
+
+*also validate the **Github manifest repository***
 
 ## Step 7:
 ### 
