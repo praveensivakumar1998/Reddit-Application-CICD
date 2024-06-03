@@ -113,10 +113,35 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/2c6bbd24-80de-4ebd-8bd4-175177784fb5)
 
 ## Step 6:
-### Create Jenkins Pipeline job for Reddit Application
+### Create and Build the application
+  * Create Pipeline job in a Jenkins Dashboard and update your JenkinsFile in a Pipeline
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/73cefee3-0ecf-4179-accb-dd8c11edbb95)
 
-  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/e7c89eb6-58ed-4153-ae36-3f7a4f89b935)
+  * Build the Reddit application
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d2fc1eaf-3ea9-46e4-bc3b-d5114a1a37a5)
 
+# Now the Continous Integration CI process is build successfully 
+   -  Sonarqube Code Vulnerability Check - Passed :tada:
+   -  Quality Gate - Passed :tada:
+   -  Npm Installation - Passed :tada:
+   -  Owasp Dependency Check - Report Created :tada:
+   -  DockerHub Image Build and Push - Passed :tada:
+   -  Trivy Image Scan - Completed :tada:
+   -  Github commit for updated image in Deployment.yaml manifest - Passed :tada:
+### Check the below screenshots for post CI process
+ ***Sonarqube Code Analysis***
+ 
+ ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d9d72a2e-4f43-44d9-b062-c81dcb5a60ce)
+ 
+ ***Owasp Dependency Check***
+ 
+ ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/1ab032c2-38d9-4530-91cf-78ad33ebaa36)
 
+ ***Trivy Image Scan Report***
+ 
+ ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d57f6f5e-9140-4230-a9da-fc41939cc3f0)
+
+## Step 7:
+### 
 
   
