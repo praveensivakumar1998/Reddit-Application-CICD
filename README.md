@@ -60,7 +60,7 @@ sudo systemctl restart docker
 ```
 
 ## Step 3:
-### Run Sonarqube container in ubuntu machine
+### Run Sonarqube as container in ubuntu machine
 ```
 docker run -d -p 9000:9000 --name sonar-server sonarqube:latest
 ```
@@ -149,6 +149,47 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 *also validate the **Github manifest repository***
 
 ## Step 7:
-### 
+### Deploy the Reddit applicaition in EKS 
+
+***Install Cli***
+
+  1.  AWS Cli (Control AWS Services)
+  2.  Kubectl (Control Kubernetes cluster, pods and objects)
+  3.  eksctl (Control EKS services)
+
+   ```
+    sudo apt update
+    sudo apt install zip -y
+   ```
+  1. **Install CLI**
+     https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+     ```
+     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+     unzip awscliv2.zip
+     sudo ./aws/install
+     ```
+  2. **Install Kubectl**
+     https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux
+     ```
+     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+     chmod +x kubectl
+     mkdir -p ~/.local/bin
+     mv ./kubectl ~/.local/bin/kubectl
+     ```
+  3. **Install eksctl**
+     https://eksctl.io/installation/
+     ```
+     ARCH=amd64
+     PLATFORM=$(uname -s)_$ARCH
+
+     curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+     curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+     tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+     sudo mv /tmp/eksctl /usr/local/bin 
+     ```
+
+
+  
 
   
