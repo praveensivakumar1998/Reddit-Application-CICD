@@ -3,7 +3,8 @@ In this End-to-End DevSecOps project, we successfully deployed a Reddit App leve
 
 > Clone this Repository : https://github.com/praveensivakumar1998/Reddit-Application-CICD.git
 
-  ![reddit-application0102](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/fd56bfe0-623f-4959-8aa8-5bb6478c3a9e)
+  
+![Reddit-Application-Final](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/2accc236-9c58-4b69-ab57-e4539295c9d2)
 
 
 
@@ -76,6 +77,12 @@ docker run -d -p 9000:9000 --name sonar-server sonarqube:latest
     - Administrator > Configuration > Webhooks > Create
       ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/50338a6b-7bac-4029-a1fe-7e5779acc1a4)
 ## Step 4:
+### Install Trivy for Image scan  in ubuntu machine
+```
+wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
+sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
+```
+## Step 5:
 ### Add the neccessary Credentials in Jenkins console 
   * Sonar as **sonar**
   * Docker as **docker-cred**
@@ -84,9 +91,10 @@ docker run -d -p 9000:9000 --name sonar-server sonarqube:latest
     Dashboard > Manage Jenkins > Credentials
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/863f74a8-67c7-44fd-a14b-87c03ae95434)
 
-## Step 5:  
+## Step 6:  
 ### Install and configure neccessary Plugins in jenkins console
   * Docker plugin
+  * Docker pipeline
   * Sonarqube scanner
   * OWASP Dependency-Check Plugin
   * Eclipse Temurin installer Plugin
@@ -115,11 +123,11 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/2c6bbd24-80de-4ebd-8bd4-175177784fb5)
 
-## Step 6
+## Step 7:
  * Create the seperate Kubernetes manifest repository for Deployment yaml update
  * update the github manifest url in Jenkins File
 
-## Step 7:
+## Step 8:
 ### Create and Build the application
   * Create Pipeline job in a Jenkins Dashboard and update your JenkinsFile in a Pipeline
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/73cefee3-0ecf-4179-accb-dd8c11edbb95)
@@ -151,7 +159,7 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 
 *also validate the **Github manifest repository***
 
-## Step 7:
+## Step 9:
 ### Deploy the Reddit applicaition in EKS 
 
 ***Install Cli***
