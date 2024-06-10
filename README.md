@@ -97,7 +97,6 @@ sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
   * Docker pipeline
   * Sonarqube scanner
   * OWASP Dependency-Check Plugin
-  * Eclipse Temurin installer Plugin
   * NodeJS Plugin
 
 ### Configure above installed plugins in a Jenkins console 
