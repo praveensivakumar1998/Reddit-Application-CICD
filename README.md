@@ -157,11 +157,11 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 --
 
 *also validate the **Github manifest repository***
-
+# Deploy the Reddit applicaition in EKS 
 ## Step 9:
-### Deploy the Reddit applicaition in EKS 
+### Install neccesary Command Line for EKS 
 
-***Install Cli***
+***Command Line tools we used for EKS Deployments***
 
   1.  AWS Cli (Control AWS Services)
   2.  Kubectl (Control Kubernetes cluster, pods and objects)
@@ -198,8 +198,106 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
      tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
      sudo mv /tmp/eksctl /usr/local/bin 
      ```
+## Step 10:
+### Create a EKS Cluster and Nodegroups:
+
+a, **Cluster creation**
+    
+    
+      eksctl create cluster --name=reddit-app \
+                            --region=ap-south-1 \
+                            --zones=ap-south-1a,ap-south-1b \
+                            --without-nodegroup 
+    
+
+The command mentioned above generates a CloudFormation template for creating an EKS cluster, which typically takes approximately 15-20 minutes to complete the  cluster creation process.
+
+**Note** - In AWS, we opt for a fully managed EKS service where we do not need to handle the EKS master nodes or their associated components (API server, scheduler, etcd, cloud controller). These elements are fully managed by AWS.
+
+***Validate the Cluster***
+```
+eksctl get cluster
+```
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/98c3771b-60e1-40a6-bab6-a710e6be5853)
+
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/ffd8c485-557d-491e-9be6-9bb3751ebe5c)
+
+b, **NodeGroup Creation**
+
+   
+    eksctl create nodegroup --cluster=reddit-app \
+                       --region=ap-south-1 \
+                       --name=reddit-app-public-nodegroup \
+                       --node-type=t3.medium \
+                       --nodes=2 \
+                       --nodes-min=2 \
+                       --nodes-max=4 \
+                       --node-volume-size=20 \
+                       --ssh-access \
+                       --ssh-public-key=my-test-keypair-mumbai \
+                       --managed \
+                       --asg-access \
+                       --external-dns-access \
+                       --full-ecr-access \
+                       --appmesh-access \
+                       --alb-ingress-access 
+                       
+***Validate the NodeGroup***
+```
+eksctl get nodegroup --cluster reddit-app --region ap-south-1
+```
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/1dac5791-0b2a-40bd-833a-01e84582871c)
+
+---
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/6b4a8675-c6b8-4fff-a6b5-5942040c655c)
+
+---
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/3eb4ce9b-0a12-47b6-9425-8ef047715a13)
+
+## Step 11:
+  
+### Install and Configure ArgoCD  :
+
+***Install ArgoCD Operators***
+    In Kubernetes, operators are custom controllers that automate the management of complex applications and services. They extend Kubernetes' capabilities to handle tasks beyond basic orchestration, ensuring more efficient and automated operations.
+
+  ```
+   curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.28.0/install.sh | bash -s v0.28.0
+
+   kubectl create -f https://operatorhub.io/install/argocd-operator.yaml
+
+   kubectl get csv -n operators
+  ```
+
+***Install ArgoCD***
+  ```
+  kubectl create namespace argocd
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  ```
+***validate the pods and service***
+
+  ```
+  kubectl get pods -n argocd
+
+  kubectl get svc -n argocd
+  ```
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/3d08ee2c-2ae3-483d-ae60-0a55fae9631e)
+  ---
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/24301db3-a088-4b57-9263-eb72ba57a716)
+  
+***Change ArgoCD service type as ClusterIp to LoadBalancer***
+  ```
+  kubectl edit -n argocd svc argocd-server
+  ```
+***Get Encrypted ArgoCD Server password***
+  ```
+  export ARGO_PWD=`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`|
+  echo $ARGO_PWD
+  ```
+  ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/eee78911-1a4d-496b-aa62-72dfd1783814)
+
 
 
   
-
+ 
   
