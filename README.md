@@ -4,7 +4,8 @@ In this End-to-End DevSecOps project, we successfully deployed a Reddit App leve
 > Clone this Repository : https://github.com/praveensivakumar1998/Reddit-Application-CICD.git
 
   
-![Reddit-Application-Final](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/9ec7e13e-97de-4464-8caa-c37b6a6ea02b)
+![Reddit-Application-Final](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/af4c1d57-4081-40d2-a470-90d4a3cd253c)
+
 
 
 
