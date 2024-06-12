@@ -134,6 +134,8 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
   * Build the Reddit application
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d2fc1eaf-3ea9-46e4-bc3b-d5114a1a37a5)
 
+### Make sure to configure Jenkins webhooks in Github - Refer this Document for webhook - https://github.com/praveensivakumar1998/setup-github-webhook-for-Jenkins
+
 # Now the Continous Integration CI process is build successfully 
    -  Sonarqube Code Vulnerability Check - Passed :tada:
    -  Quality Gate - Passed :tada:
@@ -157,7 +159,7 @@ Configure Owasp in Jenkins console > Manage Jenkins > Tools > Dependency-Check i
 --
 
 *also validate the **Github manifest repository***
-# Deploy the Reddit applicaition in EKS 
+# Deploy the Reddit application in EKS 
 ## Step 9:
 ### Install neccesary Command Line for EKS 
 
