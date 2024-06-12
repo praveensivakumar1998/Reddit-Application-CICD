@@ -4,7 +4,7 @@ In this End-to-End DevSecOps project, we successfully deployed a Reddit App leve
 > Clone this Repository : https://github.com/praveensivakumar1998/Reddit-Application-CICD.git
 
   
-![Reddit-Application-Final](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/2accc236-9c58-4b69-ab57-e4539295c9d2)
+![Reddit-Application-Final](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/9ec7e13e-97de-4464-8caa-c37b6a6ea02b)
 
 
 
@@ -296,8 +296,94 @@ eksctl get nodegroup --cluster reddit-app --region ap-south-1
   ```
   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/eee78911-1a4d-496b-aa62-72dfd1783814)
 
+## Step 12:
 
+### Install and Configure Prometheus using helm  :
+  
+***Install Helm***
+  ```
+   curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+   chmod 700 get_helm.sh
+   ./get_helm.sh
+  ```
+***Install Prometheus using helm repo***     
+  ```
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm repo update
 
+   kubectl create namespace prometheus
+
+   helm install prometheus prometheus-community/prometheus --namespace prometheus
+   
+   kubectl expose -n prometheus service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
+  ```
+
+ **Note: Make sure to allow your Ip to nodeport in Worker node SecurityGroup**
+   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/9837bd83-7d9f-481d-8dbc-c9dcfa33d8e2)
+
+   ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/c7a4544b-a9e1-45bc-8508-331f1cf42fb7)
+
+---
+***Install Grafana using helm repo***    
+  ```
+    helm repo add grafana https://grafana.github.io/helm-charts
+
+    helm repo update
+
+    kubectl create namespace grafana
+
+    helm install grafana grafana/grafana --namespace grafana
+  ```
+  **Expose the Grafana service to External Nodeport service**
+    
+    ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/d87da77e-e304-4fed-a5d4-932f427fe4f5)
   
- 
-  
+  *  Create a Datasource for Prometheus with prometheus url - http://3.109.3.216:32549/
+  *  Create a Dashboard with default kube-prometheus ID : 3662 and for Kubenetes cluster monitoring ID: 3417
+  *  You can use custom metrics for monitoring a application in Kubernetes cluster using a **Prometheus kube state metrics** [note: make sure to expose the prometheus kube state metrics service as open to external world to get the metrics]
+Check the below screenshots for reference:
+### 3662:
+
+![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/509741a1-1e12-4805-a164-16a769fe185d)
+### 6417:
+
+![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/7056c9d3-e0ac-4cd6-88c9-7c0ae9a3c3ca)
+### prometheus kubestate metrics:
+
+![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/27c933b7-61ba-4814-8ece-d784ebc92882)
+### custom dashboard using metrics from prometheus kubestate metrics:
+
+![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/f5330d7f-9856-4189-a650-59b8c552a1ee)
+
+---
+
+# End of the Project
+  - Application deployed in EKS cluster successfully - :tada:
+  - Monitoring a Cluster and App using Prometheus and Grafana - :tada:
+    ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/cbf09823-a42a-402d-a133-722bccd5fbe3)
+
+---
+# Delete EKS Cluster & Node Groups
+  ### Step-01: Delete Node Group
+  We can delete a nodegroup separately using below eksctl delete nodegroup
+ ### List EKS Clusters
+  ```
+  eksctl get clusters
+  ```
+  ### Capture Node Group name
+  ```
+  eksctl get nodegroup --cluster=<clusterName>
+  ```
+  ### Delete Node Group
+  ```
+  eksctl delete nodegroup --cluster=<clusterName> --name=<nodegroupName>
+  ```
+---
+  ### Step-02: Delete Cluster
+    We can delete cluster using eksctl delete cluster
+  ### Delete Cluster
+  ```
+  eksctl delete cluster <clusterName>
+  ```
+    
+-----
