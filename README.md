@@ -358,6 +358,9 @@ Check the below screenshots for reference:
 
 ![image](https://github.com/praveensivakumar1998/Reddit-Application-CICD/assets/108512714/f5330d7f-9856-4189-a650-59b8c552a1ee)
 
+## Final Application Verification
+  Ensure that all components are running as expected and the application is accessible. Monitor logs, metrics, and health dashboards to validate the successful deployment and functioning of the Reddit application.
+
 ---
 
 # End of the Project
